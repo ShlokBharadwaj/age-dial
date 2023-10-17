@@ -20,6 +20,12 @@ const Age = () => {
         if (!dob) {
             alert("Please select your date of birth.");
         } else {
+            const selectedDate = new Date(dob);
+            const currentDate = new Date();
+            if (selectedDate > currentDate) {
+                alert("Please select a date in the past.");
+                return;
+            }
             setShowAge(true);
             const age = calculateAge(dob);
             setCalculatedAge(age);
