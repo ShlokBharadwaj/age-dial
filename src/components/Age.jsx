@@ -13,8 +13,12 @@ const Age = () => {
   };
 
   const handleSubmit = () => {
-    setShowAge(true);
-    setCalculatedAge(calculateAge(dob));
+    if (!dob) {
+      alert("Please select your date of birth.");
+    } else {
+      setShowAge(true);
+      setCalculatedAge(calculateAge(dob));
+    }
   };
 
   useEffect(() => {
