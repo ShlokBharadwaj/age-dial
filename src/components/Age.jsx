@@ -53,8 +53,8 @@ const Age = () => {
                 {showAge ? (
                     <div>
                         <h2 className="text-2xl mb-6">
-                            <span className='text-6xl text-blue-500'>Age:</span> <span className="text-6xl">{calculatedAge.toString().split('.')[0]}</span>
-                            .<span className="text-xl">{calculatedAge.toString().split('.')[1]}</span>
+                            <span className='text-8xl text-blue-500'>Age:</span> <span className="text-8xl">{calculatedAge.toString().split('.')[0]}</span>
+                            .<span className="text-5xl">{calculatedAge.toString().split('.')[1]}</span>
                         </h2>
                         <button
                             onClick={handleReset}
