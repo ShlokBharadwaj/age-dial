@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Footer from './Footer';
 
 const Age = () => {
     const storedDob = localStorage.getItem('dob') || '';
@@ -81,6 +82,7 @@ const Age = () => {
                     </div>
                 )}
             </div>
+            <Footer />
         </div>
     );
 };
