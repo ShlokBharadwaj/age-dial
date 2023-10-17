@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
 const Age = () => {
-    const [dob, setDob] = useState("");
-    const [showAge, setShowAge] = useState(false);
-    const [calculatedAge, setCalculatedAge] = useState(null);
+    const storedDob = localStorage.getItem('dob') || '';
+    const storedAge = localStorage.getItem('calculatedAge') || null;
+
+    const [dob, setDob] = useState(storedDob);
+    const [showAge, setShowAge] = useState(!!storedAge);
+    const [calculatedAge, setCalculatedAge] = useState(storedAge);
 
     const calculateAge = (dob) => {
         const birthDate = new Date(dob);
@@ -17,14 +20,27 @@ const Age = () => {
             alert("Please select your date of birth.");
         } else {
             setShowAge(true);
-            setCalculatedAge(calculateAge(dob));
+            const age = calculateAge(dob);
+            setCalculatedAge(age);
+            localStorage.setItem('dob', dob);
+            localStorage.setItem('calculatedAge', age);
         }
+    };
+
+    const handleReset = () => {
+        setShowAge(false);
+        setDob('');
+        setCalculatedAge(null);
+        localStorage.removeItem('dob');
+        localStorage.removeItem('calculatedAge');
     };
 
     useEffect(() => {
         if (showAge) {
             const interval = setInterval(() => {
-                setCalculatedAge(calculateAge(dob));
+                const age = calculateAge(dob);
+                setCalculatedAge(age);
+                localStorage.setItem('calculatedAge', age);
             }, 100);
             return () => clearInterval(interval);
         }
@@ -33,11 +49,25 @@ const Age = () => {
     return (
         <div className="flex items-center justify-center h-screen bg-gray-900">
             <div className="text-white text-center p-8 rounded-lg shadow-lg">
-                {!showAge ? (
+                {showAge ? (
+                    <div>
+                        <h2 className="text-2xl mb-6">
+                            <span className='text-6xl text-blue-500'>Age:</span> <span className="text-6xl">{calculatedAge.toString().split('.')[0]}</span>
+                            .<span className="text-xl">{calculatedAge.toString().split('.')[1]}</span>
+                        </h2>
+                        <button
+                            onClick={handleReset}
+                            className="bg-red-500 hover:bg-red-600 text-white py-3 px-8 rounded font-semibold transition-all duration-300"
+                        >
+                            Reset
+                        </button>
+                    </div>
+                ) : (
                     <div>
                         <h1 className="text-4xl mb-6 font-bold">Select Your Date of Birth</h1>
                         <input
                             type="date"
+                            value={dob}
                             className="bg-gray-800 text-white p-4 rounded mb-4 text-center w-64 focus:outline-none text-xl"
                             onChange={(e) => setDob(e.target.value)}
                         />
@@ -49,11 +79,6 @@ const Age = () => {
                             Submit
                         </button>
                     </div>
-                ) : (
-                    <h2 className="text-2xl mb-6">
-                        <span className='text-6xl text-blue-500'>Age:</span> <span className="text-6xl">{calculatedAge.toString().split('.')[0]}</span>
-                        .<span className="text-xl">{calculatedAge.toString().split('.')[1]}</span>
-                    </h2>
                 )}
             </div>
         </div>
