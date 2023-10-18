@@ -2,11 +2,9 @@
 
 This is a Simple Age Calculator application built using Vite. The application allows users to input their date of birth and calculates their current age with high precision. The age is displayed in real-time with up to 9 decimal points of accuracy.
 
-## Features
+## Live Site
 
-- Input Date of Birth
-- Real-time age calculation
-- High precision age display
+The live site for the application can be accessed [here](https://age-dial.netlify.app/).
 
 ## Installation
 
