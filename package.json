@@ -2,7 +2,7 @@
   "name": "age-dial",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://ShlokBharadwaj.github.io/age-dial/",
+  "homepage": "https://ShlokBharadwaj.github.io/age-dial/age",
   "type": "module",
   "scripts": {
     "predeploy" : "npm run build",
